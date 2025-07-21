@@ -1,0 +1,25 @@
+{
+  "name": "yto-custom-components",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "files": [
+    "es",
+    "lib",
+    "package.json",
+    "README.md"
+  ],
+  "typings": "es/index.d.ts",
+  "scripts": {
+    "build": "vite build",
+    "release": "release-it",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.5"
+}
