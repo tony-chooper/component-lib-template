@@ -52,6 +52,7 @@ const promptsOptions = [
       { title: "vue3-template", value: 1 },
       { title: "element-plus-enhance", value: 2 },
       { title: "yto-engine", value: 3 },
+      { title: "component-lib-template", value: 4 },
     ],
   },
 ];
@@ -60,6 +61,7 @@ const remoteList = {
   1: "https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/template/template-vue3.git",
   2: "https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/public_resource/element-plus-enhance.git",
   3: "https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine.git",
+  4: "https://github.com/tony-chooper/component-lib-template.git",
 };
 const createTemplate = async () => {
   const { name, template } = await prompts(promptsOptions);
