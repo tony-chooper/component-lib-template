@@ -1,5 +1,5 @@
 {
-  "name": "create-custom-components",
+  "name": "custom-template",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -8,6 +8,10 @@
   "author": "",
   "license": "MIT",
   "packageManager": "pnpm@10.6.5",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tony-chooper/component-lib-template"
+  },
   "dependencies": {
     "chalk": "^5.4.1",
     "command-line-args": "^6.0.1",
