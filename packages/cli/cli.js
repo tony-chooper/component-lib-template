@@ -17,7 +17,7 @@ const optionDefinitions = [
 //帮助命令
 const helpSections = [
   {
-    header: "yto-custom-template",
+    header: "create-custom-template",
     content: "一个快速生成项目的脚手架",
   },
   {
