@@ -13,7 +13,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
-    "yto-custom-components": "workspace:*"
+    "elementEnhance": "workspace:*"
   },
   "devDependencies": {
     "vitepress": "^1.6.3",

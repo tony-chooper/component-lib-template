@@ -131,9 +131,12 @@ importers:
 
   play:
     dependencies:
-      yto-custom-components:
+      elementEnhance:
         specifier: workspace:*
         version: link:../packages/dist
+      yto-custom-components:
+        specifier: workspace:*
+        version: link:../packages/components
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^6.0.0
@@ -144,7 +147,7 @@ importers:
 
   site:
     dependencies:
-      yto-custom-components:
+      elementEnhance:
         specifier: workspace:*
         version: link:../packages/dist
     devDependencies:
