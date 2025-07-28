@@ -3,7 +3,7 @@ export const LIBRARY_CONFIG = {
   // 组件前缀，可以根据需要修改
   PREFIX: 'yto',
   // 组件库名称
-  NAME: 'yto-custom-h5',
+  NAME: 'yto-custom-components',
   // 版本
   VERSION: '1.0.0'
 } as const;

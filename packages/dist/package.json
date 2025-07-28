@@ -1,0 +1,35 @@
+{
+  "name": "elementEnhance",
+  "version": "1.0.4",
+  "description": "",
+  "type": "module",
+  "main": "./lib/index.js",
+  "module": "./es/index.mjs",
+  "typings": "./es/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./resolvers": {
+      "types": "./es/resolvers.d.ts",
+      "import": "./es/resolvers.mjs"
+    }
+  },
+  "files": [
+    "es",
+    "lib",
+    "package.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "release": "release-it",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.5"
+}

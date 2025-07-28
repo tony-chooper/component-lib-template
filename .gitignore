@@ -1,5 +1,6 @@
 node_modules
-packages/dist
+packages/dist/es
+packages/dist/lib
 play/dist
 __tests__
 site/docs/.vitepress/cache
