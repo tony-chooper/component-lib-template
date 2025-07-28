@@ -1,4 +1,5 @@
-import _Card from "./Card.vue";
+import _AdaptionContainer from './adaption-container.vue'
+// import { withInstall } from 'components-utils'
 import type { App, Plugin } from "vue";
 
 type SFCWithInstall<T> = T & Plugin;
@@ -10,5 +11,6 @@ const withInstall = <T>(comp: T) => {
   };
   return comp as SFCWithInstall<T>;
 };
-export const Card = withInstall(_Card);
-export default Card;
+
+export const AdaptionContainer = withInstall(_AdaptionContainer);
+export default AdaptionContainer;

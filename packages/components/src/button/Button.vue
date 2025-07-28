@@ -1,5 +1,5 @@
 <template>
-  <button class="yto-button" :class="buttonStyle">
+  <button class="yto-button text-red-500" :class="buttonStyle">
     <slot />
   </button>
 </template>
@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import './style/index.scss'
 import { computed } from "vue";
-defineOptions({ name: "yto-button" });
+defineOptions({ name: "Button" });
 type ButtonProps = {
   type?: string;
 };

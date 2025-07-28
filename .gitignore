@@ -1,3 +1,5 @@
 node_modules
 packages/dist
+play/dist
+__tests__
 site/docs/.vitepress/cache

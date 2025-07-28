@@ -7,6 +7,8 @@ import run from "../utils/run";
 import gulpSass from "gulp-sass";
 import SassLang from "sass";
 import { readFileSync, writeFileSync } from "fs";
+import postcss from 'gulp-postcss';
+
 
 const sass = gulpSass(SassLang);
 const removeDist = () => {
@@ -26,6 +28,7 @@ const buildStyle = () => {
 const buildStyleSass = () => {
   return src(`${componentPath}/src/**/style/**.scss`)
     .pipe(sass())
+    .pipe(postcss())
     .pipe(autoPrefixer())
     .pipe(dest(`${distPath}/dist/lib/src`))
     .pipe(dest(`${distPath}/dist/es/src`));
@@ -44,7 +47,6 @@ const copyAndModifyPackageJson = async () => {
   pkg.name = "elementEnhance";
   writeFileSync(distPkgPath, JSON.stringify(pkg, null, 2), "utf-8");
 };
-
 export const execBuildTask = () => {
   return series(
     async () => removeDist(),

@@ -1,5 +1,5 @@
 import DefaultTheme from "vitepress/theme";
-import YtoCustom from "yto-custom-components";
+import YtoCustom from "elementEnhance";
 export default {
   ...DefaultTheme,
   enhanceApp: async ({ app }) => {

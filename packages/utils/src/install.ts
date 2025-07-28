@@ -1,8 +1,7 @@
-import _Card from "./Card.vue";
 import type { App, Plugin } from "vue";
+export type SFCWithInstall<T> = T & Plugin;
 
-type SFCWithInstall<T> = T & Plugin;
-const withInstall = <T>(comp: T) => {
+export const withInstall = <T>(comp: T) => {
   (comp as SFCWithInstall<T>).install = (app: App) => {
     const name = (comp as any).name;
     //注册组件
@@ -10,5 +9,3 @@ const withInstall = <T>(comp: T) => {
   };
   return comp as SFCWithInstall<T>;
 };
-export const Card = withInstall(_Card);
-export default Card;

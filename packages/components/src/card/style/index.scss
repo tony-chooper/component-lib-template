@@ -9,3 +9,8 @@
     color: #fff;
   }
 }
+.yto-card {
+  p {
+    @apply font-bold text-yellow-700;
+  }
+}

@@ -5,6 +5,10 @@
   "type": "module",
   "main": "index.ts",
   "module": "index.ts",
+  "exports": {
+    ".": "index.ts",
+    "./resolvers": "resolvers.ts"
+  },
   "files": [
     "es",
     "lib",
@@ -16,6 +20,9 @@
     "release": "release-it",
     "test": "vitest",
     "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "components-utils": "workspace:*"
   },
   "keywords": [],
   "author": "",
