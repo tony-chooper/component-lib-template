@@ -4,3 +4,4 @@ packages/dist/lib
 play/dist
 __tests__
 site/docs/.vitepress/cache
+site/docs/.vitepress/dist

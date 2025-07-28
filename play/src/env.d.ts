@@ -1,1 +1,1 @@
-declare module 'yto-custom-components'
+declare module "yto-custom-components";

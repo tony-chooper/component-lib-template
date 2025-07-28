@@ -9,22 +9,22 @@
 </template>
 
 <script lang="ts" setup>
-import { adaptionContainerProps } from './adaption-container'
-import './style/adaption-container.scss'
+import { adaptionContainerProps } from "./adaption-container";
+import "./style/adaption-container.scss";
 defineOptions({
-  name: 'AdaptionContainer',
-})
+  name: "AdaptionContainer",
+});
 
-const props = defineProps(adaptionContainerProps)
+const props = defineProps(adaptionContainerProps);
 
 const getStyle = () => {
-  const minWidthPx = `${props.minWidth}px`
+  const minWidthPx = `${props.minWidth}px`;
   return {
-    '--min-width': minWidthPx,
-    gap: props.gap + 'px',
-    'min-width': props.containerMinWidth
-      ? props.containerMinWidth + 'px'
-      : props.minNum * props.minWidth + props.gap * props.minNum + 'px',
-  }
-}
+    "--min-width": minWidthPx,
+    gap: props.gap + "px",
+    "min-width": props.containerMinWidth
+      ? props.containerMinWidth + "px"
+      : props.minNum * props.minWidth + props.gap * props.minNum + "px",
+  };
+};
 </script>

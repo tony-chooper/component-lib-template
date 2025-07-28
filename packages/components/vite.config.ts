@@ -4,17 +4,17 @@ import vue from "@vitejs/plugin-vue";
 import dts from "vite-plugin-dts";
 import DefineOptions from "unplugin-vue-define-options/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import UnoCSS, {PerModuleModePlugin} from 'unocss/vite';
+import UnoCSS from "unocss/vite";
 
 const unocssFix = {
   name: "unocss:fix-dist-chunk",
   apply: "build",
-  resolveId(id:string) {
+  resolveId(id: string) {
     if (id === "virtual:uno.css") {
       return id;
     }
   },
-  load(id:string) {
+  load(id: string) {
     if (id === "virtual:uno.css") {
       return { code: "" };
     }
@@ -62,7 +62,7 @@ export default defineConfig({
     },
     lib: {
       entry: ["index.ts", "resolvers.ts"],
-      name:'dist'
+      name: "dist",
     },
   },
   plugins: [
@@ -71,37 +71,37 @@ export default defineConfig({
     UnoCSS({
       // mode: 'global',
       // mode: 'per-module',
-      mode:'vue-scoped',
+      mode: "vue-scoped",
       // mode: 'dist-chunk',
       // transformCSS: 'post',
-      transformCSS: 'pre',
+      transformCSS: "pre",
     }),
     unocssFix,
     dts({
       entryRoot: ".",
-      outDir: ['../dist/es/', '../dist/lib/'],
+      outDir: ["../dist/es/", "../dist/lib/"],
       //指定使用的tsconfig.json为我们整个项目根目录下,如果不配置,你也可以在components下新建tsconfig.json
       tsconfigPath: "../../tsconfig.json",
-      include:['index.ts', '"resolvers.ts"', 'src'],
+      include: ["index.ts", '"resolvers.ts"', "src"],
       exclude: [
-        "**/*.test.ts",     // 排除测试文件
-        "**/__tests__/**",  // 排除测试目录
+        "**/*.test.ts", // 排除测试文件
+        "**/__tests__/**", // 排除测试目录
       ],
     }),
     DefineOptions(),
     {
-      name:'style',
+      name: "style",
       generateBundle(config, bundle) {
-        const keys = Object.keys(bundle)
+        const keys = Object.keys(bundle);
         for (const key of keys) {
-          const bundler:any = bundle[key]
+          const bundler: any = bundle[key];
           this.emitFile({
-            type:'asset',
-            fileName:key,
+            type: "asset",
+            fileName: key,
             source: bundler?.code?.replace(/\.scss/g, ".css"),
-          })
+          });
         }
-      }
-    }
+      },
+    },
   ],
 });

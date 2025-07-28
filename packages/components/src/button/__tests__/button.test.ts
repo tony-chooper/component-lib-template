@@ -1,16 +1,16 @@
-import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
-import button from '../Button.vue';
+import { describe, expect, it } from "vitest";
+import { mount } from "@vue/test-utils";
+import button from "../Button.vue";
 // The component to test
-describe('test button', () => {
-  it('should render slot', () => {
+describe("test button", () => {
+  it("should render slot", () => {
     const wrapper = mount(button, {
       slots: {
-        default: 'easyest'
-      }
+        default: "easyest",
+      },
     });
 
     // Assert the rendered text of the component
-    expect(wrapper.text()).toContain('easyest');
+    expect(wrapper.text()).toContain("easyest");
   });
 });

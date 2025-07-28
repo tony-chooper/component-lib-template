@@ -7,14 +7,13 @@ import run from "../utils/run";
 import gulpSass from "gulp-sass";
 import SassLang from "sass";
 import { readFileSync, writeFileSync } from "fs";
-import postcss from 'gulp-postcss';
-
+import postcss from "gulp-postcss";
 
 const sass = gulpSass(SassLang);
 const removeDist = () => {
   return Promise.all([
     delPath(`${distPath}/dist/es`),
-    delPath(`${distPath}/dist/lib`)
+    delPath(`${distPath}/dist/lib`),
   ]);
 };
 
@@ -56,6 +55,6 @@ export const execBuildTask = () => {
       () => buildComponent(),
       // () => copyfile("package.json"),
       // () => copyfile("README.md")
-    )
+    ),
   );
 };

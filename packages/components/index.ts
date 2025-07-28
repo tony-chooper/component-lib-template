@@ -1,6 +1,6 @@
 import * as components from "./src/index";
 import { App } from "vue";
-import 'virtual:uno.css';
+import "virtual:uno.css";
 export * from "./src/index";
 
 export default {

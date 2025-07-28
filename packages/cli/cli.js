@@ -5,7 +5,7 @@ import commandLineUsage from "command-line-usage";
 import { readFile } from "fs/promises";
 
 const pkg = JSON.parse(
-  await readFile(new URL("./package.json", import.meta.url))
+  await readFile(new URL("./package.json", import.meta.url)),
 );
 
 //配置命令参数

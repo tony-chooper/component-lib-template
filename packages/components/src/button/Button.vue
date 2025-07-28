@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import './style/index.scss'
+import "./style/index.scss";
 import { computed } from "vue";
 defineOptions({ name: "Button" });
 type ButtonProps = {

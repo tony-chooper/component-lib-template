@@ -1,14 +1,31 @@
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginVue from "eslint-plugin-vue";
-import { defineConfig } from "eslint/config";
+import myEslintConfig from "@yto/eslint-config";
+import path from "path";
+import { fileURLToPath } from "url";
 
+// 获取当前文件的目录路径
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-export default defineConfig([
-  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"], plugins: { js }, extends: ["js/recommended"] },
-  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"], languageOptions: { globals: globals.browser } },
-  tseslint.configs.recommended,
-  pluginVue.configs["flat/essential"],
-  { files: ["**/*.vue"], languageOptions: { parserOptions: { parser: tseslint.parser } } },
-]);
+// 读取 .eslintrc-auto-import.json 文件
+// const autoImportPath = path.resolve(__dirname, 'packages/play/.eslintrc-auto-import.json')
+// const autoImportConfig = JSON.parse(fs.readFileSync(autoImportPath, 'utf8'))
+
+export default [
+  ...myEslintConfig,
+  {
+    languageOptions: {
+      globals: {
+        // ...autoImportConfig.globals, // 合并自动导入的 globals
+      },
+    },
+  },
+  {
+    ignores: [
+      "play/*",
+      "site/*",
+      "eslint.config.mjs",
+      "packages/dist/*",
+      "packages/cli/*",
+    ],
+  },
+];

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes } from "vue";
 
 export const adaptionContainerProps = {
   list: {
@@ -21,6 +21,8 @@ export const adaptionContainerProps = {
     type: Number,
     default: 1,
   },
-}
+};
 
-export type AdaptionContainerProps = ExtractPropTypes<typeof adaptionContainerProps>
+export type AdaptionContainerProps = ExtractPropTypes<
+  typeof adaptionContainerProps
+>;

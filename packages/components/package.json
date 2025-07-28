@@ -21,9 +21,6 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "dependencies": {
-    "components-utils": "workspace:*"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
