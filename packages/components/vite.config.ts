@@ -5,6 +5,7 @@ import dts from "vite-plugin-dts";
 import DefineOptions from "unplugin-vue-define-options/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import UnoCSS from "unocss/vite";
+import ElementPlus from 'unplugin-element-plus/vite'
 
 const unocssFix = {
   name: "unocss:fix-dist-chunk",
@@ -31,10 +32,13 @@ export default defineConfig({
     //压缩
     //minify: false,
     rollupOptions: {
+      // treeshake:{
+      //   moduleSideEffects:['directives/index.ts']
+      // },
       //忽略打包vue文件
-      external: ["vue", /\.scss/],
+      external: ["vue", /\.scss/, "element-plus", /^element-plus\/.*/],
       // external: ["vue"],
-      input: ["index.ts", "resolvers.ts"],
+      input: ["index.ts", "resolvers.ts", ],
       output: [
         {
           //打包格式
@@ -43,6 +47,7 @@ export default defineConfig({
           entryFileNames: "[name].mjs",
           //让打包目录和我们目录对应
           preserveModules: true,
+          // preserveModulesRoot:'src',
           exports: "named",
           //配置打包根目录
           dir: "../dist/es",
@@ -54,6 +59,7 @@ export default defineConfig({
           entryFileNames: "[name].js",
           //让打包目录和我们目录对应
           preserveModules: true,
+          // preserveModulesRoot:'src',
           exports: "named",
           //配置打包根目录
           dir: "../dist/lib",
@@ -82,7 +88,7 @@ export default defineConfig({
       outDir: ["../dist/es/", "../dist/lib/"],
       //指定使用的tsconfig.json为我们整个项目根目录下,如果不配置,你也可以在components下新建tsconfig.json
       tsconfigPath: "../../tsconfig.json",
-      include: ["index.ts", '"resolvers.ts"', "src"],
+      include: ["index.ts", '"resolvers.ts"', "src", "directives"],
       exclude: [
         "**/*.test.ts", // 排除测试文件
         "**/__tests__/**", // 排除测试目录
@@ -103,5 +109,10 @@ export default defineConfig({
         }
       },
     },
+    // 将 ElementPlus 插件移到最后，避免影响打包结构
+    ElementPlus({
+      useSource: false,
+      // defaultLocale: 'zh-cn',
+    }),
   ],
 });

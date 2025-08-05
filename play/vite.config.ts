@@ -8,6 +8,8 @@ import UnoCSS from "unocss/vite";
 import Components from "unplugin-vue-components/vite";
 // @ts-ignore
 import { elementEnhanceResolvers } from "elementEnhance/resolvers";
+import AutoImport from 'unplugin-auto-import/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   plugins: [
@@ -15,8 +17,11 @@ export default defineConfig({
     DefineOptions(),
     visualizer(),
     UnoCSS(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
     Components({
-      resolvers: [elementEnhanceResolvers()],
+      resolvers: [elementEnhanceResolvers(), ElementPlusResolver()],
     }),
   ],
 });

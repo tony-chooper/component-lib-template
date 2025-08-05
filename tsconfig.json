@@ -10,6 +10,9 @@
     "moduleResolution": "Node",
     "lib": ["esnext", "dom"],
     "resolveJsonModule": true,
-    "types": ["unplugin-vue-define-options/macros-global"]
+    "types": [
+      "unplugin-vue-define-options/macros-global",
+      "element-plus/global"
+    ]
   }
 }

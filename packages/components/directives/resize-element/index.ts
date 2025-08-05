@@ -1,0 +1,30 @@
+import { Directive } from "vue";
+const map = new WeakMap();
+const ob = new ResizeObserver((entries) => {
+  // 使用 requestAnimationFrame 来防止过度触发
+  window.requestAnimationFrame(() => {
+    for (const entry of entries) {
+      const handle = map.get(entry.target);
+      if (handle) {
+        const box = entry.borderBoxSize[0];
+        if (box.inlineSize === 0 && box.blockSize === 0) return;
+        handle({
+          width: box.inlineSize,
+          height: box.blockSize,
+        });
+      }
+    }
+  });
+});
+
+const ResizeElement: Directive = {
+  mounted: function (el, binding) {
+    ob.observe(el);
+    map.set(el, binding.value);
+  },
+  unmounted(el) {
+    ob.unobserve(el);
+  },
+};
+export { ResizeElement };
+export default ResizeElement;

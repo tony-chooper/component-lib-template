@@ -4,3 +4,4 @@ declare module "vitest";
 declare module "@vitejs/plugin-vue";
 declare module "@vitejs/plugin-vue-jsx";
 declare module "gulp-postcss";
+declare module "element-plus"
