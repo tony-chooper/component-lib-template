@@ -1,5 +1,5 @@
-import _Card from "./Card.vue";
+import _Card from "./Index.vue";
 import { withInstall } from "../../utils/install";
 
-export const Card = withInstall(_Card);
-export default Card;
+export const YtoCard = withInstall(_Card);
+export default YtoCard;

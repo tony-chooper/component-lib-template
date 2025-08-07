@@ -5,22 +5,12 @@ import dts from "vite-plugin-dts";
 import DefineOptions from "unplugin-vue-define-options/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import UnoCSS from "unocss/vite";
-import ElementPlus from 'unplugin-element-plus/vite'
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { VantResolver } from '@vant/auto-import-resolver';
+import { unocssFix, replaceScssToCss, removeEmptyVue3Mjs } from "./script/plugins";
+import postCssPxToRem from 'postcss-pxtorem'
 
-const unocssFix = {
-  name: "unocss:fix-dist-chunk",
-  apply: "build",
-  resolveId(id: string) {
-    if (id === "virtual:uno.css") {
-      return id;
-    }
-  },
-  load(id: string) {
-    if (id === "virtual:uno.css") {
-      return { code: "" };
-    }
-  },
-};
 export default defineConfig({
   // test: {
   //   environment: "happy-dom"
@@ -32,13 +22,10 @@ export default defineConfig({
     //压缩
     //minify: false,
     rollupOptions: {
-      // treeshake:{
-      //   moduleSideEffects:['directives/index.ts']
-      // },
       //忽略打包vue文件
-      external: ["vue", /\.scss/, "element-plus", /^element-plus\/.*/],
+      external: ["vue", /\.scss/, 'vant', /^vant\/.*/],
       // external: ["vue"],
-      input: ["index.ts", "resolvers.ts", ],
+      input: ["index.ts", "resolvers.ts", "directives/index.ts"],
       output: [
         {
           //打包格式
@@ -71,6 +58,16 @@ export default defineConfig({
       name: "dist",
     },
   },
+  css:{
+    postcss:{
+      plugins:[
+        postCssPxToRem({
+          rootValue: 37.5,
+          propList:['*'],
+        })
+      ]
+    }
+  },
   plugins: [
     vue(),
     vueJsx(),
@@ -95,24 +92,12 @@ export default defineConfig({
       ],
     }),
     DefineOptions(),
-    {
-      name: "style",
-      generateBundle(config, bundle) {
-        const keys = Object.keys(bundle);
-        for (const key of keys) {
-          const bundler: any = bundle[key];
-          this.emitFile({
-            type: "asset",
-            fileName: key,
-            source: bundler?.code?.replace(/\.scss/g, ".css"),
-          });
-        }
-      },
-    },
-    // 将 ElementPlus 插件移到最后，避免影响打包结构
-    ElementPlus({
-      useSource: false,
-      // defaultLocale: 'zh-cn',
+    replaceScssToCss(),
+    AutoImport({
+      resolvers: [VantResolver()],
+    }),
+    Components({
+      resolvers: [VantResolver()],
     }),
   ],
 });

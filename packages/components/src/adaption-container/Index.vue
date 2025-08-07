@@ -9,12 +9,11 @@
 </template>
 
 <script lang="ts" setup>
-import { adaptionContainerProps } from "./adaption-container";
-import "./style/adaption-container.scss";
+import { adaptionContainerProps } from "./props";
+import "./style/index.scss";
 defineOptions({
   name: "AdaptionContainer",
 });
-
 const props = defineProps(adaptionContainerProps);
 
 const getStyle = () => {

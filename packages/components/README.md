@@ -44,13 +44,13 @@ app.mount("#app");
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import Components from "unplugin-vue-components/vite";
-import { elementEnhanceResolvers } from "yto-custom-h5/resolvers";
+import { ytoCustomH5Resolvers } from "yto-custom-h5/resolvers";
 
 export default defineConfig({
   plugins: [
     vue(),
     Components({
-      resolvers: [elementEnhanceResolvers()],
+      resolvers: [ytoCustomH5Resolvers()],
     }),
   ],
 });
@@ -148,5 +148,5 @@ pnpm test
 ## 技术实现
 
 - **自动前缀**: 使用 `withPrefix` 工具函数统一处理组件注册
-- **动态解析**: 通过 `elementEnhanceResolvers` 支持多种命名方式
+- **动态解析**: 通过 `ytoCustomH5Resolvers` 支持多种命名方式
 - **类型支持**: 完整的 TypeScript 类型声明

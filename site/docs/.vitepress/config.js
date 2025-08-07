@@ -1,9 +1,11 @@
+import { applyPlugins } from "@ruabick/md-demo-plugins";
+
 export default {
   themeConfig: {
     siteTitle: "vitepress",
     nav: [
       { text: "指南", link: "/guild/" },
-      { text: "组件", link: "/components/button/" },
+      { text: "组件", link: "/examples/button/" },
     ],
     socialLinks: [
       { icon: "github", link: "https://github.com/qddidi/easyest" },
@@ -33,17 +35,26 @@ export default {
           ],
         },
       ],
-      "/components/": [
+      "/examples/": [
         {
           text: "基础组件",
           items: [
             {
               text: "Button",
-              link: "/components/button",
+              link: "/examples/button",
+            },
+            {
+              text: "table",
+              link: "/examples/table",
             },
           ],
         },
       ],
+    },
+  },
+  markdown: {
+    config: (md) => {
+      applyPlugins(md);
     },
   },
 };

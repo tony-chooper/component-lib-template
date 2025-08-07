@@ -1,5 +1,5 @@
 import type { Directive, DirectiveBinding } from "vue";
-import { ElMessage } from "element-plus";
+
 interface ElType extends HTMLElement {
   copyData: string | number;
   __handleClick__: any;
@@ -25,10 +25,7 @@ function handleClick(this: any) {
   input.select();
   document.execCommand("Copy");
   document.body.removeChild(input);
-  ElMessage({
-    type: "success",
-    message: "复制成功",
-  });
+  showToast('复制成功');
 }
 export { Copy };
 export default Copy;

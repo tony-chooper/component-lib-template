@@ -7,21 +7,34 @@ import { visualizer } from "rollup-plugin-visualizer";
 import UnoCSS from "unocss/vite";
 import Components from "unplugin-vue-components/vite";
 // @ts-ignore
-import { elementEnhanceResolvers } from "elementEnhance/resolvers";
+import { ytoCustomH5Resolvers } from "ytoCustomH5/resolvers";
 import AutoImport from 'unplugin-auto-import/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { VantResolver } from '@vant/auto-import-resolver';
+import postCssPxToRem from 'postcss-pxtorem'
 
 export default defineConfig({
+  css:{
+    postcss:{
+      plugins:[
+        postCssPxToRem({
+          rootValue: 37.5,
+          propList:['*'],
+        })
+      ]
+    }
+  },
   plugins: [
     vue(),
     DefineOptions(),
     visualizer(),
     UnoCSS(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [VantResolver()],
     }),
     Components({
-      resolvers: [elementEnhanceResolvers(), ElementPlusResolver()],
+      resolvers: [
+        ytoCustomH5Resolvers(),
+         VantResolver()],
     }),
   ],
 });

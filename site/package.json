@@ -13,10 +13,12 @@
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
-    "elementEnhance": "workspace:*",
-    "yto-custom-components": "workspace:*"
+    "yto-custom-components": "workspace:*",
+    "ytoCustomH5": "workspace:*"
   },
   "devDependencies": {
+    "@ruabick/md-demo-plugins": "^0.3.3",
+    "@ruabick/vitepress-demo-block": "^0.3.3",
     "vitepress": "^1.6.3"
   }
 }

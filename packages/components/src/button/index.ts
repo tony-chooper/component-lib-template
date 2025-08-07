@@ -1,5 +1,5 @@
-import _Button from "./Button.vue";
+import _Button from "./Index.vue";
 import { withInstall } from "../../utils/install";
 
-export const Button = withInstall(_Button);
-export default Button;
+export const YtoButton = withInstall(_Button);
+export default YtoButton;

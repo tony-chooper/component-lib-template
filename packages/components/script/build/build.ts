@@ -43,7 +43,7 @@ const copyAndModifyPackageJson = async () => {
   const pkgPath = `${componentPath}/package.json`;
   const distPkgPath = `${distPath}/dist/package.json`;
   const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
-  pkg.name = "elementEnhance";
+  pkg.name = "ytoCustomH5";
   writeFileSync(distPkgPath, JSON.stringify(pkg, null, 2), "utf-8");
 };
 export const execBuildTask = () => {

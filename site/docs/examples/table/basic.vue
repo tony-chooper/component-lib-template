@@ -1,39 +1,17 @@
 <template>
   <div class="bg-[#f9f9f9]">
-    <YtoButton type="primary">主要按钮</YtoButton>
-    {{ loading }}
-    {{ finished }}
-
-    <!-- <div class="flex gap-2">
-      <div class="cursor-pointer" v-copy="'测试一下'">测试一下Copy</div>
-    </div> -->
-    <YtoTable ref="tableRef" :columns="columns" :data="staticData" :finished="true" finishedText="">
-    </YtoTable>
-    <yto-adaption-container :list="list" :min-num="3" :min-width="230">
-      <template #default="{ info }">
-        <div class="bg-[skyblue] h-[50px] flex justify-center items-center text-[16px]">
-          {{ info }}
-        </div>
-      </template>
-    </yto-adaption-container>
-    <YtoTable ref="tableRef" :columns="columns" :data="data" :requestApi="handleUpdateData" :finished="finished"
-      v-model:loading="loading" :defaultSort="defaultSort" @on-sort="handleSort"
+    <yto-table ref="tableRef" :columns="columns" :data="data" :requestApi="handleUpdateData" :headerbg="true"
+      :finished="finished" v-model:loading="loading" :defaultSort="defaultSort" @on-sort="handleSort"
       @on-body-cell-click="handleBodyCellClick">
-    </YtoTable>
+    </yto-table>
   </div>
 </template>
 <script lang="ts" setup>
 import { onMounted, ref, useTemplateRef, unref } from "vue";
-// import { Button, AdaptionContainer } from "yto-custom-components";
-// import { YtoButton, YtoCard, YtoAdaptionContainer, YtoTable } from "ytoCustomH5";
-// import { Copy as vCopy } from 'ytoCustomH5/directives'
-// console.log('copy---', vCopy)
+// import { Table } from "ytoCustomH5";
 const handleSort = (sortInof: any) => {
   console.log('handleSort----', sortInof)
 }
-const list = ref([
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-]);
 const columns = [
   {
     label: '姓名',
@@ -57,7 +35,7 @@ const totalData = Array.from({ length: 35 }, (_, i) => ({
   age: 18 + (i % 10),
   hobby: ['篮球', '足球', '乒乓球'][i % 3]
 }))
-const staticData = totalData.toSpliced(0, 27)
+
 const pageNum = ref(1)
 const pageSize = ref(10)
 const finished = ref(false)

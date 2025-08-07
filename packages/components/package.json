@@ -22,6 +22,9 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
+  "peerDependencies": {
+    "vant": "^4.9.21"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

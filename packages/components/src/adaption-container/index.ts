@@ -1,5 +1,5 @@
-import _AdaptionContainer from "./adaption-container.vue";
+import _AdaptionContainer from "./Index.vue";
 import { withInstall } from "../../utils/install";
 
-export const AdaptionContainer = withInstall(_AdaptionContainer);
-export default AdaptionContainer;
+export const YtoAdaptionContainer = withInstall(_AdaptionContainer);
+export default YtoAdaptionContainer;

@@ -3,12 +3,12 @@ import { COMPONENT_PREFIX } from "./utils/config";
 /**
  * 自动按需引入组件库的 resolver
  */
-export function elementEnhanceResolvers(): ComponentResolver {
+export function ytoCustomH5Resolvers(): ComponentResolver {
   return {
     type: "component",
     // @ts-expect-error
     resolve: (name: string) => {
-      console.log("elementEnhanceResolvers---name", name);
+      console.log("ytoCustomH5Resolvers---name", name);
       // 只处理以COMPONENT_PREFIX开头的组件
       if (name.startsWith(COMPONENT_PREFIX)) {
         // 去掉前缀，首字母大写转横线命名
@@ -17,9 +17,9 @@ export function elementEnhanceResolvers(): ComponentResolver {
           .replace(/([A-Z])/g, "-$1")
           .toLowerCase()
           .replace(/^-/, "");
-        // console.log('elementEnhanceResolvers---kebabName', kebabName)
+        // console.log('ytoCustomH5Resolvers---kebabName', kebabName, name)
         return {
-          importName: rawName,
+          importName: name,
           path: import.meta.resolve(
             `./src/${kebabName}/index.mjs`,
             import.meta.dirname,

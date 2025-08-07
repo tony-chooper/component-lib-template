@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "types": [
       "unplugin-vue-define-options/macros-global",
-      "element-plus/global"
+      "./packages/components/auto-imports.d.ts"
     ]
   }
 }

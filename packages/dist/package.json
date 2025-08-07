@@ -1,5 +1,5 @@
 {
-  "name": "elementEnhance",
+  "name": "ytoCustomH5",
   "version": "1.0.4",
   "description": "",
   "type": "module",
@@ -14,6 +14,10 @@
     "./resolvers": {
       "types": "./es/resolvers.d.ts",
       "import": "./es/resolvers.mjs"
+    },
+    "./directives": {
+      "types": "./es/directives/index.d.ts",
+      "import": "./es/directives/index.mjs"
     }
   },
   "files": [
