@@ -1,13 +1,16 @@
 import DefaultTheme from "vitepress/theme";
 import YtoCustom from "ytoCustomH5";
-import DemoBlock from "@ruabick/vitepress-demo-block";
-import "@ruabick/vitepress-demo-block/dist/style.css";
+import "./style.css";
+import {
+  AntDesignContainer,
+  ElementPlusContainer,
+  NaiveUIContainer,
+} from "@vitepress-demo-preview/component";
+import "@vitepress-demo-preview/component/dist/style.css";
 export default {
   ...DefaultTheme,
   enhanceApp: async ({ app }) => {
-    app.component("demo", DemoBlock);
-    // app is the Vue 3 app instance from `createApp()`. router is VitePress'
-    // custom router. `siteData`` is a `ref`` of current site-level metadata.
+    app.component("demo-preview", ElementPlusContainer);
     console.log("YtoCustom---", YtoCustom);
     app.use(YtoCustom);
   },

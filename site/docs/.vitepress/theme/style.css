@@ -1,0 +1,5 @@
+.vitepress-demo-preview-preview {
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}

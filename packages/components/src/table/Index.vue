@@ -1,6 +1,11 @@
 <template>
   <div class="yto-table">
-    <!-- 表头 -->
+   
+    <!-- 表格内容 -->
+    <van-list :ref="(instance: any) => listRef(instance)" v-bind="$attrs"
+      :finished-text="data.length ? finishedText : emptyText" :error-text="errorText" :immediate-check="immediateCheck"
+      @load="onLoad">
+       <!-- 表头 -->
     <div class="table-header bg-[#fff] flex text-[12px] p-[10px] leading-[16px]">
       <div v-for="col in columns" :key="col.prop" class="header-cell flex text-center px-[3px] text-[#999]" :class="[
         col.align === 'left' ? 'justify-start' : col.align === 'right' ? 'justify-end' : 'justify-center',
@@ -18,10 +23,6 @@
         </div>
       </div>
     </div>
-    <!-- 表格内容 -->
-    <van-list :ref="(instance: any) => listRef(instance)" v-bind="$attrs"
-      :finished-text="data.length ? finishedText : emptyText" :error-text="errorText" :immediate-check="immediateCheck"
-      @load="onLoad">
       <div class="table-body text-[12px]">
         <div v-for="(item, index) in data" :key="index"
           class="body-row min-h-[32px] py-0 px-[10px] flex items-center break-all"
