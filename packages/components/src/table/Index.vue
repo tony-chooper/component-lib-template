@@ -30,7 +30,7 @@
           <template v-if="column.type === 'index'">
             {{ padZero(index + 1) }}
           </template>
-          <template v-else-if="$slots[column.prop]">
+          <template v-else-if="slots[column.prop]">
             <slot :name="column.prop" :row="item" />
           </template>
           <template v-else-if="column.render">
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts" generic="T extends BaseRecord">
-import { reactive, watchEffect } from 'vue';
+import { reactive, watchEffect, Slots, useSlots } from 'vue';
 import { isNil, debounce } from '../../utils/utils';
 import { tableProps, Column, SortType, BaseRecord } from './props';
 import './style/index.scss'
@@ -69,6 +69,7 @@ enum SORT_ORDER {
   DESC = 'DESC'
 }
 const sort = reactive({ ...defaultSort });
+const slots: Slots = useSlots();
 
 const handleHeaderCellClick = debounce((column: Column<T>) => {
   const { sort: columnSort, prop } = column
