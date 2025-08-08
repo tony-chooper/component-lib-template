@@ -4,6 +4,10 @@ import {
   componentPreview,
 } from "@vitepress-demo-preview/plugin";
 import themeConfig from "./theme/config.js";
+// import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { VantResolver } from '@vant/auto-import-resolver';
 
 const alias = {
   "@components": path.resolve(__dirname, "../../../packages/components/src"),
@@ -34,6 +38,15 @@ export default {
     ssr: {
       noExternal: ["vant"], // 让 Vite 处理 vant 的依赖
     },
-    plugins: [htmlStylePlugin()],
+    plugins: [
+      htmlStylePlugin(), 
+      // vue(),
+      AutoImport({
+        resolvers: [VantResolver()],
+      }),
+      Components({
+        resolvers: [VantResolver()],
+      }),
+    ],
   },
 };

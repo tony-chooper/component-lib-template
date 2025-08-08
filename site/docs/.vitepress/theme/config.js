@@ -1,5 +1,6 @@
 export default {
-  siteTitle: "vitepress",
+  siteTitle: "YtoCustomH5",
+   logo: '/images/yto-plus-logo.svg',
   nav: [
     { text: "指南", link: "/guild/" },
     { text: "组件", link: "/examples/button/" },
@@ -20,15 +21,15 @@ export default {
           },
         ],
       },
-      {
-        text: "进阶",
-        items: [
-          {
-            text: "xx",
-            link: "/xx",
-          },
-        ],
-      },
+      // {
+      //   text: "进阶",
+      //   items: [
+      //     {
+      //       text: "xx",
+      //       link: "/xx",
+      //     },
+      //   ],
+      // },
     ],
     "/examples/": [
       {
