@@ -1,13 +1,11 @@
 <template>
   <div class="bg-[#f9f9f9]">
     <YtoButton type="primary">主要按钮</YtoButton>
-    {{ loading }}
-    {{ finished }}
 
     <!-- <div class="flex gap-2">
       <div class="cursor-pointer" v-copy="'测试一下'">测试一下Copy</div>
     </div> -->
-    <YtoTable ref="tableRef" :columns="columns" :data="staticData" :finished="true" finishedText="">
+    <YtoTable ref="tableRef" :columns="columns" :data="staticData">
     </YtoTable>
     <yto-adaption-container :list="list" :min-num="3" :min-width="230">
       <template #default="{ info }">
@@ -16,10 +14,12 @@
         </div>
       </template>
     </yto-adaption-container>
-    <YtoTable ref="tableRef" :columns="columns" :data="data" :requestApi="handleUpdateData" :finished="finished"
-      v-model:loading="loading" :defaultSort="defaultSort" @on-sort="handleSort"
+    <YtoListTable ref="tableRef" :columns="columns" :onLoad="getData" :defaultSort="defaultSort" @on-sort="handleSort"
       @on-body-cell-click="handleBodyCellClick">
-    </YtoTable>
+      <template #name="{ row }">
+        <span class="text-red">{{ row.name }}</span>
+      </template>
+    </YtoListTable>
   </div>
 </template>
 <script lang="ts" setup>
@@ -38,12 +38,13 @@ const columns = [
   {
     label: '姓名',
     prop: 'name',
-    sort: { prop: 'name' }
+    sort: { prop: 'name' },
   },
   {
     label: '年龄',
     prop: 'age',
-    sort: { prop: 'age' }
+    sort: { prop: 'age' },
+    link: true
   },
   {
     label: '爱好',
@@ -58,13 +59,9 @@ const totalData = Array.from({ length: 35 }, (_, i) => ({
   hobby: ['篮球', '足球', '乒乓球'][i % 3]
 }))
 const staticData = totalData.toSpliced(0, 27)
-const pageNum = ref(1)
-const pageSize = ref(10)
-const finished = ref(false)
-const data = ref([])
-const loading = ref(false)
 
-const getData = (pageNum: number, pageSize: number) => {
+
+const getData = ({ pageNum = 1, pageSize = 10 }) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const start = (pageNum - 1) * pageSize
@@ -77,24 +74,15 @@ const getData = (pageNum: number, pageSize: number) => {
     }, 2000)
   })
 }
-const handleBodyCellClick = (row: any) => {
-  console.log('handleBodyCellClick---', row)
+const handleBodyCellClick = (row: any, column: any) => {
+  console.log('handleBodyCellClick---', row, column)
 }
-const handleUpdateData = async () => {
-  loading.value = true
-  const result = await getData(pageNum.value, pageSize.value) as any
-  data.value = data.value.concat(result.list)
-  finished.value = result.list.length < pageSize.value
-  loading.value = false
-  if (!finished.value) {
-    pageNum.value++
-  }
-}
-handleUpdateData()
+
 onMounted(() => {
   console.log('tableRef---', unref(tableRef))
   setTimeout(() => {
     defaultSort.value = { prop: 'name', order: 'ASC' }
   }, 3000)
+  unref(tableRef)?.updateList(true)
 })
 </script>

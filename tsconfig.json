@@ -14,5 +14,5 @@
       "unplugin-vue-define-options/macros-global",
       "./packages/components/auto-imports.d.ts"
     ]
-  }
+  },
 }

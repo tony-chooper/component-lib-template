@@ -1,11 +1,6 @@
 <template>
   <div class="yto-table">
-   
-    <!-- 表格内容 -->
-    <van-list :ref="(instance: any) => listRef(instance)" v-bind="$attrs"
-      :finished-text="data.length ? finishedText : emptyText" :error-text="errorText" :immediate-check="immediateCheck"
-      @load="onLoad">
-       <!-- 表头 -->
+    <!-- 表头 -->
     <div class="table-header bg-[#fff] flex text-[12px] p-[10px] leading-[16px]">
       <div v-for="col in columns" :key="col.prop" class="header-cell flex text-center px-[3px] text-[#999]" :class="[
         col.align === 'left' ? 'justify-start' : col.align === 'right' ? 'justify-end' : 'justify-center',
@@ -23,57 +18,59 @@
         </div>
       </div>
     </div>
-      <div class="table-body text-[12px]">
-        <div v-for="(item, index) in data" :key="index"
-          class="body-row min-h-[32px] py-0 px-[10px] flex items-center break-all"
-          :class="{ 'bg-[#fff]': (index + 1) % 2 === 0 }">
-          <div v-for="column in columns" :key="column.prop" class="body-cell flex px-[3px] py-[4px]" :class="[
-            column.align === 'left' ? 'justify-start' : column.align === 'right' ? 'justify-end' : 'justify-center',
-            column.width ? '' : 'flex-1'
-          ]" :style="getStyles(column.width)" @click="handleBodyCellClick(item)">
-            <template v-if="column.type === 'index'">
-              {{ padZero(index + 1) }}
-            </template>
-            <template v-else-if="$slots[column.prop]">
-              <slot :name="column.prop" :row="item" />
-            </template>
-            <template v-else-if="column.render">
-              <span>{{ column.render(item) }}</span>
-            </template>
-            <template v-else>
-              <span>{{ isNil(item[column.prop]) ? emptyCellText : item[column.prop] }}</span>
-            </template>
-          </div>
+    <!-- 表格内容 -->
+    <div class="table-body text-[12px]">
+      <div v-for="(item, index) in data" :key="index"
+        class="body-row min-h-[32px] py-0 px-[10px] flex items-center break-all"
+        :class="{ 'bg-[#fff]': (index + 1) % 2 === 0 }">
+        <div v-for="column in columns" :key="column.prop" class="body-cell flex px-[3px] py-[4px]" :class="[
+          column.align === 'left' ? 'justify-start' : column.align === 'right' ? 'justify-end' : 'justify-center',
+          column.width ? '' : 'flex-1'
+        ]" :style="getStyles(column.width)" @click="handleBodyCellClick(item, column, index)">
+          <template v-if="column.type === 'index'">
+            {{ padZero(index + 1) }}
+          </template>
+          <template v-else-if="$slots[column.prop]">
+            <slot :name="column.prop" :row="item" />
+          </template>
+          <template v-else-if="column.render">
+            <span>{{ column.render(item) }}</span>
+          </template>
+          <template v-else>
+            <span :style="`${column.link && !isNil(item[column.prop]) ? 'color: var(--van-primary-color)' : ''}`">{{
+              isNil(item[column.prop]) ?
+                emptyCellText :
+                item[column.prop] }}</span>
+          </template>
         </div>
       </div>
-    </van-list>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ComponentInternalInstance, reactive, watch, watchEffect } from 'vue';
+<script setup lang="ts" generic="T extends BaseRecord">
+import { reactive, watchEffect } from 'vue';
 import { isNil, debounce } from '../../utils/utils';
-import { tableProps, Column, SortType, TableRow } from './props';
+import { tableProps, Column, SortType, BaseRecord } from './props';
 import './style/index.scss'
-import { isFunction } from 'vant/es/utils';
-import { getCurrentInstance } from 'vue'
 
 defineOptions({ name: "Table" });
-const { defaultSort, requestApi, columns, data, finishedText, errorText, immediateCheck, emptyText, emptyCellText } = defineProps(tableProps);
+const { defaultSort, columns, data, emptyCellText } = defineProps(tableProps<T>());
 const emit = defineEmits<
   {
     'on-sort': [sortInof: SortType],
-    'on-header-cell-click': [info: Column],
-    'on-body-cell-click': [info: TableRow],
+    'on-header-cell-click': [info: Column<T>],
+    'on-body-cell-click': [info: T, column: Column<T>, index: number],
   }
 >();
+const DEBOUNCE_DELAY = 300;
 enum SORT_ORDER {
   ASC = 'ASC',
   DESC = 'DESC'
 }
 const sort = reactive({ ...defaultSort });
 
-const handleHeaderCellClick = debounce((column: Column) => {
+const handleHeaderCellClick = debounce((column: Column<T>) => {
   const { sort: columnSort, prop } = column
   const { order } = sort
   if (columnSort) {
@@ -82,29 +79,18 @@ const handleHeaderCellClick = debounce((column: Column) => {
     return
   }
   emit('on-header-cell-click', column)
-}, 300);
+}, DEBOUNCE_DELAY);
 
-const handleBodyCellClick = debounce((row: TableRow) => {
-  console.log('on-body-cell-click---', row)
-  emit('on-body-cell-click', row)
-}, 300);
-
-
+const handleBodyCellClick = debounce((row: T, column: Column<T>, index: number) => {
+  console.log('on-body-cell-click---', row, column, index)
+  emit('on-body-cell-click', row, column, index)
+}, DEBOUNCE_DELAY);
 const padZero = (n: number) => {
   return n < 10 ? '0' + n : n
 }
-
 const getStyles = (width?: number | string) => {
   if (!width) return {};
   return { width: typeof width === 'string' ? width : width + 'px' }
-}
-
-const onLoad = () => {
-  if (isFunction(requestApi)) { requestApi() }
-}
-const vm = getCurrentInstance() as ComponentInternalInstance
-const listRef = (listInstance: ComponentInternalInstance) => {
-  vm.exposeProxy = vm.exposed = listInstance || {}
 }
 
 watchEffect(() => {

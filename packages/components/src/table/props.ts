@@ -4,48 +4,32 @@ export interface SortType {
   prop: string; 
   order: string; 
 }
-
-export interface Column {
+export interface BaseRecord {
+  [key: string]: any
+}
+export interface Column<T> {
   label: string;
   prop: string;
   width?: number;
   align?: "left" | "center" | "right";
   sort?: SortType;
   type?: 'index' | 'default';
-  render?: (row: TableRow) => string | number;
+  link?: boolean | string;
+  render?: (row: T) => string | number;
   [propName: string]: any;
 }
-
-// 基础表格行数据类型
-export interface TableRow {
-  [key: string]: any;
-}
-
-// 表格组件 Props 类型
-export const tableProps = {
+export const tableProps = <T>() => ({
   columns: {
-    type: Array as PropType<Column[]>,
+    type: Array as PropType<Column<T>[]>,
     default: () => [],
   },
   data: {
-    type: Array as PropType<TableRow[]>,
+    type: Array as PropType<T[]>,
     default: () => [],
-  },
-  requestApi: {
-    type: Function as PropType<() => void>,
-    default: null,
   },
   defaultSort: {
     type: Object as PropType<SortType>,
     default: () => ({ prop: '', order: '' }),
-  },
-  immediateCheck:{
-    type: Boolean,
-    default: false,
-  },
-  finishedText: {
-    type: String,
-    default: '我也是有底线的...'
   },
   emptyText: {
     type: String,
@@ -54,13 +38,7 @@ export const tableProps = {
   emptyCellText: {
     type: String,
     default: '-'
-  },
-  errorText:{
-    type:String, 
-    default:'请求失败，请重新加载'
   }
-};
+});
 
-export type TableProps = ExtractPropTypes<
-  typeof tableProps
->;
+export type TableProps<T extends BaseRecord> = ExtractPropTypes<ReturnType<typeof tableProps<T>>>;
