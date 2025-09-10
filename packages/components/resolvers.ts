@@ -8,7 +8,7 @@ export function ytoCustomH5Resolvers(): ComponentResolver {
     type: "component",
     // @ts-expect-error
     resolve: (name: string) => {
-      console.log("ytoCustomH5Resolvers---name", name);
+      // console.log("ytoCustomH5Resolvers---name", name);
       // 只处理以COMPONENT_PREFIX开头的组件
       if (name.startsWith(COMPONENT_PREFIX)) {
         // 去掉前缀，首字母大写转横线命名

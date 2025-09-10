@@ -11,7 +11,7 @@
         </div>
         <!-- 标题区域 -->
         <h1 class="main-title">技术平台部 | 业务UI组件库</h1>
-        <p class="sub-title">基于 Vant，助力业务快速开发的 Vue3 组件库</p>
+        <p class="sub-title">基于 Vant，助力 H5 业务快速开发的 Vue3 移动端组件库</p>
 
         <!-- 按钮组 -->
         <div class="button-group">
@@ -36,7 +36,7 @@ import { useRouter } from 'vitepress'
 
 const router = useRouter()
 const handleStart = () => {
-  router.go('/guide/quickstart')
+  router.go('/guild/fast')
 }
 
 const handleToGithub = () => { }

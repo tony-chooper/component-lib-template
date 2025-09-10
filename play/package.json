@@ -13,7 +13,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
-    "ytoCustomH5": "workspace:*",
+    "@yto/custom-h5": "workspace:*",
     "yto-custom-components": "workspace:*"
   }
 }

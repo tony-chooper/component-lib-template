@@ -45,8 +45,6 @@ const processCssFiles = async (distType: "es" | "lib") => {
 
       // 删除原始CSS文件
       unlinkSync(cssFile);
-
-      console.log(`处理完成 ${cssFile} -> ${targetFile}`);
     } catch (error) {
       console.error(`处理 ${cssFile} 时发生错误:`, error);
     }

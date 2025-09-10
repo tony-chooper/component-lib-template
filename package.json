@@ -8,7 +8,7 @@
     "merge:style": "tsx node_modules/gulp/bin/gulp.js -f packages/components/script/build/mergeStyle.ts",
     "build:component": "tsx node_modules/gulp/bin/gulp.js -f packages/components/script/build/index.ts && pnpm merge:style",
     "build:component-watch": "tsx node_modules/gulp/bin/gulp.js -f packages/components/script/build/watch.ts",
-    "publish:component": "tsx node_modules/gulp/bin/gulp.js -f packages/components/script/publish/index.ts",
+    "publish:component": "pnpm build:component && tsx node_modules/gulp/bin/gulp.js -f packages/components/script/publish/index.ts",
     "publish:cli": "tsx node_modules/gulp/bin/gulp.js -f packages/components/script/publish/cli.ts",
     "docs:dev": "pnpm --filter site run docs:dev",
     "play:dev": "pnpm --filter play run dev",
@@ -22,6 +22,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.1",
     "@types/glob": "^9.0.0",
     "@types/gulp": "^4.0.17",
     "@types/gulp-autoprefixer": "^0.0.37",

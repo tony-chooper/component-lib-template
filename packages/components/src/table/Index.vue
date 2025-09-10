@@ -83,7 +83,6 @@ const handleHeaderCellClick = debounce((column: Column<T>) => {
 }, DEBOUNCE_DELAY);
 
 const handleBodyCellClick = debounce((row: T, column: Column<T>, index: number) => {
-  console.log('on-body-cell-click---', row, column, index)
   emit('on-body-cell-click', row, column, index)
 }, DEBOUNCE_DELAY);
 const padZero = (n: number) => {
@@ -95,7 +94,6 @@ const getStyles = (width?: number | string) => {
 }
 
 watchEffect(() => {
-  console.log('watchEffect--', defaultSort)
   Object.assign(sort, defaultSort)
 })
 </script>

@@ -1,6 +1,6 @@
 {
-  "name": "ytoCustomH5",
-  "version": "1.0.4",
+  "name": "@yto/custom-h5",
+  "version": "0.0.1-beta.1",
   "description": "",
   "type": "module",
   "main": "./lib/index.js",
@@ -31,6 +31,9 @@
     "release": "release-it",
     "test": "vitest",
     "coverage": "vitest run --coverage"
+  },
+  "publishConfig": {
+    "registry": "https://npm.yto.net.cn"
   },
   "keywords": [],
   "author": "",

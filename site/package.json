@@ -16,7 +16,7 @@
     "@vitepress-demo-preview/component": "^2.5.1",
     "@vitepress-demo-preview/plugin": "^1.4.0",
     "yto-custom-components": "workspace:*",
-    "ytoCustomH5": "workspace:*"
+    "@yto/custom-h5": "workspace:*"
   },
   "devDependencies": {
     "vitepress": "^1.6.3"

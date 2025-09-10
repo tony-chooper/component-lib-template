@@ -19,6 +19,7 @@ import Table from '../table/Index.vue';
 import { listTableProps, TableRow } from './props';
 import { isFunction } from 'vant/es/utils';
 
+defineOptions({ name: "ListTable" });
 // 新增接口定义
 interface LoadParams {
   pageNum: number;

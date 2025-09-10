@@ -1,21 +1,5 @@
 import type { ExtractPropTypes, PropType } from "vue";
 
-export interface SortType { 
-  prop: string; 
-  order: string; 
-}
-
-export interface Column {
-  label: string;
-  prop: string;
-  width?: number;
-  align?: "left" | "center" | "right";
-  sort?: SortType;
-  type?: 'index' | 'default';
-  render?: (row: TableRow) => string | number;
-  [propName: string]: any;
-}
-
 export interface TableRow {
   [key: string]: any;
 }

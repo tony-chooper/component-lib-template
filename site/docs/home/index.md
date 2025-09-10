@@ -12,7 +12,7 @@ import Home from './Home.vue'
 
 <style>
 .vp-doc{
-  width: 100vw !important;
+  /* width: 100vw !important; */
   margin: 0 !important;
   padding: 0 !important;
   max-width: 100vw !important;

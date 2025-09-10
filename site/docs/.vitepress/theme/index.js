@@ -1,5 +1,5 @@
 import DefaultTheme from "vitepress/theme";
-import YtoCustom from "ytoCustomH5";
+import YtoCustom from "@yto/custom-h5";
 import "./style.css";
 
 import {
