@@ -48,8 +48,8 @@ export default defineConfig({
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import YtoCustom from '@yto/customH5'
-import '@yto/customH5/style'
+import YtoCustom from '@yto/custom-h5'
+import '@yto/custom-h5/style'
 
 createApp(App).use(YtoCustom).mount('#app')
 ```

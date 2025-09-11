@@ -27,6 +27,15 @@ function htmlStylePlugin() {
 }
 export default {
   themeConfig,
+   head: [
+    [
+      'script',
+      {
+        src: '/htmlStyle.js',
+        type: 'module'
+      }
+    ]
+  ],
   markdown: {
     config: (md) => {
       md.use(containerPreview, { alias });
